@@ -79,6 +79,11 @@ namespace MVVMTestApp
 
             StateUtilities.IsLaunching = false;
         }
+
+        private void AppBarSave_Click(object sender, EventArgs e)
+        {
+            vm.SaveAccomplishments();
+        }
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
