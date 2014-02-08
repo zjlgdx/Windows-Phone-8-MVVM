@@ -5,6 +5,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MVVMTestApp.Model;
 
 namespace MVVMTestApp.ViewModelNamespace
@@ -59,6 +60,26 @@ namespace MVVMTestApp.ViewModelNamespace
 
             Accomplishments = a;
             //MessageBox.Show("Got accomplishments from storage");
+        }
+
+        public void SaveAccomplishments()
+        {
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+
+            foreach (Accomplishment a in Accomplishments)
+            {
+                if (settings.Contains(a.Name))
+                {
+                    settings[a.Name] = a;
+                }
+                else
+                {
+                    settings.Add(a.Name, a.GetCopy());
+                }
+            }
+
+            settings.Save();
+            MessageBox.Show("Finished saving accomplishments");
         }
     }
 }
